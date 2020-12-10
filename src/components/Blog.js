@@ -24,13 +24,13 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
         }
     }
     const expanded = () => (
-        <div>
+        <div className="expanded">
             {blog.title} <button onClick={() => setView(false)}>hide</button> <br/>
             {blog.url} <br/>
-            {blog.likes} <button onClick={likeBlog}> like</button> <br/>
+            {blog.likes} <button onClick={likeBlog} id='like-button'> like</button> <br/>
             {blog.author} <br/>
-            {(blog.user.username === user.username) || !(blog.user === null) ?
-                <button onClick={handleDelete}>delete</button> :
+            {blog.user.username === user.username ?
+                <button id='delete-button' onClick={handleDelete}>delete</button> :
                 ''
             }
 
@@ -39,11 +39,11 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
 
     const minimized = () => (
         <div>
-            {blog.title} {blog.author} <button onClick={() => setView(true)}>view</button>
+            {blog.title} {blog.author} <button id='view-button' onClick={() => setView(true)}>view</button>
         </div>
     )
     return (
-        <div style={blogStyle}>
+        <div style={blogStyle} className='blog'>
             {view === true ?
                 expanded() :
                 minimized()

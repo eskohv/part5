@@ -77,21 +77,21 @@ const App = () => {
                 <input
                     type="text"
                     value={username}
-                    name="Username"
+                    id='username'
                     onChange={({ target }) => setUsername(target.value)}
                 />
             </div>
             <div>
                 password
                 <input
-                    type="password"
+                    type='password'
                     value={password}
-                    name="Password"
+                    id='password'
                     onChange={({ target }) => setPassword(target.value)}
                 />
 
             </div>
-            <button type="submit">login</button>
+            <button id="loginButton" type="submit">login</button>
         </form>
     )
 
@@ -108,15 +108,20 @@ const App = () => {
         }, 5000)
     }
 
+    const logoutHandler = async (event) => {
+        event.preventDefault()
+        setUser(null)
+        await window.localStorage.clear()
+    }
 
     const blogView = () => (
         <div>
             <h2>blogs</h2>
-            <p>{user.name} logged in <button onClick={() => setUser(null)}>logout</button></p>
+            <p>{user.name} logged in <button onClick={logoutHandler}>logout</button></p>
 
             <Togglable buttonLabel='create' ref={blogFormRef}>
                 <BlogForm
-                    createNote={handleNewBlog}
+                    createBlogPost={handleNewBlog}
                 />
             </Togglable>
 
